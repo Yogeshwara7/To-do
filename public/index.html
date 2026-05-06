@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Todo App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Auth Screen -->
+  <div id="auth-screen">
+    <div class="card">
+      <h1>Todo App</h1>
+      <div class="tabs">
+        <button id="tab-login" class="tab active" onclick="switchTab('login')">Login</button>
+        <button id="tab-register" class="tab" onclick="switchTab('register')">Register</button>
+      </div>
+      <div id="auth-login">
+        <input type="email"    id="login-email"    placeholder="Email" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button class="btn-primary" onclick="login()">Login</button>
+      </div>
+      <div id="auth-register" class="hidden">
+        <input type="text"     id="reg-name"     placeholder="Full Name" />
+        <input type="email"    id="reg-email"    placeholder="Email" />
+        <input type="password" id="reg-password" placeholder="Password" />
+        <button class="btn-primary" onclick="register()">Create Account</button>
+      </div>
+      <p id="auth-msg" class="msg"></p>
+    </div>
+  </div>
+
+  <!-- App Screen -->
+  <div id="app-screen" class="hidden">
+    <header>
+      <h1>My Tasks</h1>
+      <div class="header-right">
+        <span id="user-name"></span>
+        <button class="btn-outline" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Add Task -->
+      <div class="add-form card">
+        <input type="text"  id="task-title" placeholder="Task title..." />
+        <textarea           id="task-desc"  placeholder="Description (optional)"></textarea>
+        <button class="btn-primary" onclick="addTask()">Add Task</button>
+        <p id="task-msg" class="msg"></p>
+      </div>
+
+      <!-- Pending -->
+      <section>
+        <h2>Pending <span id="pending-count" class="count"></span></h2>
+        <div id="pending-list"></div>
+      </section>
+
+      <!-- Completed -->
+      <section>
+        <h2>Completed <span id="completed-count" class="count"></span></h2>
+        <div id="completed-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
