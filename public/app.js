@@ -43,6 +43,19 @@ async function login() {
   showApp();
 }
 
+async function loginWithGoogle() {
+  const { data, error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin
+    }
+  });
+  if (error) {
+    const msg = document.getElementById('auth-msg');
+    setMsg(msg, error.message);
+  }
+}
+
 async function logout() {
   await sb.auth.signOut();
   currentUser = null;
@@ -162,6 +175,7 @@ function esc(str) {
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
+// Handle OAuth callback and initial session
 sb.auth.getSession().then(({ data }) => {
   if (data.session) {
     currentUser = data.session.user;
@@ -169,8 +183,14 @@ sb.auth.getSession().then(({ data }) => {
   }
 });
 
+// Listen for auth state changes (including OAuth callback)
 sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_OUT') {
+  if (event === 'SIGNED_IN' && session) {
+    currentUser = session.user;
+    showApp();
+  } else if (event === 'SIGNED_OUT') {
     currentUser = null;
+    document.getElementById('app-screen').classList.add('hidden');
+    document.getElementById('auth-screen').classList.remove('hidden');
   }
 });
