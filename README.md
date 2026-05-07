@@ -2,11 +2,6 @@
 
 Manage your daily tasks with a clean, simple interface.
 
-## Demo Credentials
-| Role    | Email            | Password    |
-|---------|------------------|-------------|
-| Student | student@demo.com | Student@123 |
-
 ---
 
 ## Run Locally
@@ -54,10 +49,3 @@ Open [http://localhost:3000](http://localhost:3000)
    - `SUPABASE_SERVICE_KEY` → your Supabase service role key
 
 ---
-
-## Features
-- User registration and login
-- Add tasks with title and description
-- Mark tasks complete or pending
-- Edit and delete tasks
-- Separate pending and completed sections
